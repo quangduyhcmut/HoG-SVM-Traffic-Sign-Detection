@@ -1,5 +1,11 @@
 {
     "cSpell.words": [
-        "imgs"
-    ]
+        "cellsx",
+        "cellsy",
+        "chieu",
+        "imgs",
+        "isnan",
+        "nguoc"
+    ],
+    "python.pythonPath": "C:\\Users\\QuangDuy\\Anaconda3\\envs\\torch_cv\\python.exe"
 }
