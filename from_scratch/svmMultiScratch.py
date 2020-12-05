@@ -72,14 +72,11 @@ labels = np.stack(labels, axis=0)
 # third: append the bias dimension of ones (i.e. bias trick) so that our SVM
 # only has to worry about optimizing a single weight matrix W.
 data = np.hstack([data, np.ones((data.shape[0], 1))])
-# print (data.shape)
-# print(labels.shape)
-# print(labels)
 
 svm = LinearSVM()
 
 tic = time.time()
-loss_hist = svm.train(data, labels, learning_rate=0.00001, reg=0.0001, num_iters=25000, verbose=False)
+loss_hist = svm.train(data, labels, learning_rate=1e-2, reg=1e-2, num_iters=25000, verbose=False)
 toc = time.time()
 print ('That took %fs' % (toc - tic))
 
@@ -96,7 +93,6 @@ plt.show()
 # training and validation set
 y_train_pred = svm.predict(data)
 print ('training accuracy: %f' % (np.mean(labels == y_train_pred), ))
-
 
 print("[INFO] extracting features...")
 data = []
@@ -129,7 +125,6 @@ for imagePath in paths.list_images(testPath):
 	# update the data and labels
 	# print(H.shape)
 	data.append(hogFeature)
-	# data.append(hogFeatureScratch)
 	labels.append(int(make))
 
 data = np.stack(data, axis=0)
@@ -140,7 +135,7 @@ labels = np.stack(labels, axis=0)
 data = np.hstack([data, np.ones((data.shape[0], 1))])
 
 load_svm = LinearSVM()
-load_svm.load_weights(row = data.shape[1], col = len(os.listdir(testPath)), path = r'model\svm-scratch.sav')
+load_svm.load_weights(row = data.shape[1], col = len(os.listdir(testPath)), path = r'model/SGD-SVM-scratch-8-class.sav')
 predLabel = load_svm.predict(data)
 # print(predLabel)
 # print(labels)
