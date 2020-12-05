@@ -1,11 +1,20 @@
 {
     "cSpell.words": [
+        "annot",
+        "bboxes",
         "cellsx",
         "cellsy",
         "chieu",
+        "gioi",
+        "hiem",
+        "hieu",
         "imgs",
         "isnan",
-        "nguoc"
+        "khac",
+        "lenh",
+        "nguoc",
+        "nguy",
+        "zalo"
     ],
     "python.pythonPath": "C:\\Users\\QuangDuy\\Anaconda3\\envs\\torch_cv\\python.exe"
 }

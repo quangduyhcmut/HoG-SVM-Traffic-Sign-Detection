@@ -2,7 +2,7 @@ import os, sys, shutil
 sys.path.append('from_scratch')
 import numpy as np
 import cv2
-from hogExtractor import hogDescriptorScratch, hogDescriptorSkimage
+from from_scratch.hogExtractor import hogDescriptorScratch, hogDescriptorSkimage
 
 import sklearn
 from sklearn import svm

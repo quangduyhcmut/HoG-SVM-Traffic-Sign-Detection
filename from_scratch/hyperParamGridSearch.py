@@ -3,7 +3,7 @@ sys.path.append('from_scratch')
 from sklearn import svm, datasets
 from sklearn.model_selection import GridSearchCV
 import cv2
-from hogExtractor import hogDescriptorScratch, hogDescriptorSkimage
+from from_scratch.hogExtractor import hogDescriptorScratch, hogDescriptorSkimage
 import numpy as np
 from imutils import paths
 import argparse
