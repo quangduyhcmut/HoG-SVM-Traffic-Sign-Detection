@@ -7,14 +7,16 @@ from hogExtractor import hogDescriptorScratch, hogDescriptorSkimage
 
 import sklearn
 from sklearn import svm
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.linear_model import SGDClassifier
 from imutils import paths
 import argparse
 import time
 import pickle
 from linearClassifier import LinearSVM
 # TODO: training with NO-SIGN image (negative image) large amount
- 
-defaultTestImage = r'from_scratch\test_3\3\1341.png'
+
+defaultTestImage = r'from_scratch\images\test_3\3\1341.png'
 testPath = r'C:\Users\QuangDuy\Desktop\bienbao_data\BTL_AI\mini-zalo-data\test'
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--imgPath", required=False, default=defaultTestImage, help="Path to test image")
@@ -48,23 +50,34 @@ hogFeature = hogDescriptorScratch(gray,
 data = np.stack(hogFeature, axis=0)
 data = np.expand_dims(data, axis=0)
 print(data.shape)
-data = np.hstack([data, np.ones((1, 1))])
+# data = np.hstack([data, np.ones((1, 1))])
 
 
 print("[INFO] loading classifier...")
-svm = LinearSVM()
+# svm = LinearSVM()
 
-# model = svm.SVC(C=10.0, kernel='rbf', verbose=False, gamma=0.005)
-modelPath1 = 'model/SGD-SVM-scratch-8-class.sav'
+# svm = svm.SVC(C=10.0, kernel='rbf', verbose=False, gamma=0.005)
+svm = SGDClassifier(learning_rate='optimal', loss='modified_huber', penalty='l2', alpha=1e-5, max_iter=5000, verbose=False, n_jobs=8, tol=1e-3)
+
+modelPath1 = 'model/SGD-SVM-Sklearn-8-class.sav'
 # print(data.shape[0])
-svm.load_weights(row = data.shape[1], col = 8, path = modelPath1)
+# svm.load_weights(row = data.shape[1], col = 8, path = modelPath1)
 
 # modelPath2 = 'model/mini-zalo-data-7class-scratch.sav'
-# model = pickle.load(open(modelPath1, 'rb'))
+svm = pickle.load(open(modelPath1, 'rb'))
+# svm = CalibratedClassifierCV(svm)
 start = time.time()
+
 label = svm.predict(data.reshape((1,-1)))
+score = svm.predict_proba(data.reshape((1,-1)))
+# score = svm.decision_function(data.reshape((1,-1)))
+# print(score)
+# svm.fit(data, label)
+# print(svm.predict_proba(data.reshape((1,-1))))[:,1]
 print("[INFO] predicting time: ", time.time()-start)
+
 print(label)
+print('confident score: ', max(score[0]))
 
 """
 mini zalo data

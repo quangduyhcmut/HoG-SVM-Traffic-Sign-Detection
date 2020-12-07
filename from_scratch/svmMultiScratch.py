@@ -1,4 +1,5 @@
 # SVM SGD for multiclass classification from scratch training with 8 class (1 negative)
+# TODO: add RBF kernel before training
 import sys, os
 sys.path.append(r'from_scratch')
 
@@ -13,6 +14,7 @@ from calSVMLoss import svm_loss_naive, svm_loss_vectorized
 from linearClassifier import LinearSVM
 import time
 from sklearn import metrics
+from sklearn.kernel_approximation import RBFSampler
 
 plt.rcParams['figure.figsize'] = (10.0, 8.0) # set default size of plot
 plt.rcParams['image.interpolation'] = 'nearest'
@@ -36,6 +38,8 @@ print("[INFO] extracting features...")
 data = []
 imgs = []
 labels = []
+
+# rbf_feature = RBFSampler(gamma=0.001, random_state=None, n_components=20000)
 
 for imagePath in paths.list_images(trainPath):
 
@@ -72,7 +76,7 @@ labels = np.stack(labels, axis=0)
 # third: append the bias dimension of ones (i.e. bias trick) so that our SVM
 # only has to worry about optimizing a single weight matrix W.
 data = np.hstack([data, np.ones((data.shape[0], 1))])
-
+# data = rbf_feature.fit_transform(data)
 svm = LinearSVM()
 
 tic = time.time()
@@ -87,7 +91,7 @@ svm.save_weights(path = 'model/SGD-SVM-scratch-8-class.sav')
 plt.plot(loss_hist)
 plt.xlabel('Iteration number')
 plt.ylabel('Loss value')
-plt.show()
+# plt.show()
 
 # Write the LinearSVM.predict function and evaluate the performance on both the
 # training and validation set
@@ -133,6 +137,7 @@ labels = np.stack(labels, axis=0)
 # third: append the bias dimension of ones (i.e. bias trick) so that our SVM
 # only has to worry about optimizing a single weight matrix W.
 data = np.hstack([data, np.ones((data.shape[0], 1))])
+# data = rbf_feature.fit_transform(data)
 
 load_svm = LinearSVM()
 load_svm.load_weights(row = data.shape[1], col = len(os.listdir(testPath)), path = r'model/SGD-SVM-scratch-8-class.sav')

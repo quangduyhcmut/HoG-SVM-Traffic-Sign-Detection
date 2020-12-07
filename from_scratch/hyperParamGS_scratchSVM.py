@@ -1,5 +1,6 @@
 # SVM SGD hyperparameter search (1 negative)
 # SVM SGD for multiclass classification from scratch training with 8 class (1 negative)
+# TODO: add RBF kernel's params searching
 import sys, os
 sys.path.append(r'from_scratch')
 
