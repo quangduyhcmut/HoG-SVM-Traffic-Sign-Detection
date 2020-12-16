@@ -61,7 +61,7 @@ param_grid = {'C': [1.0, 1e1, 1e2, 1e3, 5e3, 1e4, 5e4, 1e5],
               'gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1],
               'kernel': ['rbf', 'linear', 'poly' ]}
 SVC = svm.SVC(kernel='rbf', class_weight='balanced')
-clf = GridSearchCV(SVC, param_grid, cv=4)
+clf = GridSearchCV(SVC, param_grid, cv=4, n_jobs=-1)
 clf = clf.fit(data1, labels)
 # print("done in %0.3fs" % (time() - t0))
 print("Best estimator found by grid search:")

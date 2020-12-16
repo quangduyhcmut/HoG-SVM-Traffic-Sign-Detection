@@ -57,7 +57,7 @@ print("[INFO] loading classifier...")
 # svm = LinearSVM()
 
 # svm = svm.SVC(C=10.0, kernel='rbf', verbose=False, gamma=0.005)
-svm = SGDClassifier(learning_rate='optimal', loss='modified_huber', penalty='l2', alpha=1e-5, max_iter=5000, verbose=False, n_jobs=8, tol=1e-3)
+# svm = SGDClassifier(learning_rate='optimal', loss='modified_huber', penalty='l2', alpha=1e-5, max_iter=5000, verbose=False, n_jobs=8, tol=1e-3)
 
 modelPath1 = 'model/SGD-SVM-Sklearn-8-class.sav'
 # print(data.shape[0])
