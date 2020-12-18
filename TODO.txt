@@ -1,1 +1,0 @@
-lấy thêm hình về quả bóng, biển số xe, đèn giao thông để train class negative
