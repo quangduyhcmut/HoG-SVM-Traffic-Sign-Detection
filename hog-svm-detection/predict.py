@@ -27,7 +27,7 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.resize(gray, (96, 96))
  
 # extract Histogram of Oriented Gradients from the logo
-hogFeature = hog(gray,orientations=9,pixels_per_cell=(8, 8),cells_per_block=(4, 4),transform_sqrt=True,visualize=False,block_norm='L2')
+hogFeature = hog(gray,orientations=9,pixels_per_cell=(8, 8),cells_per_block=(2, 2),transform_sqrt=True,visualize=False,block_norm='L2')
 
 data = np.stack(hogFeature, axis=0)
 data = np.expand_dims(data, axis=0)

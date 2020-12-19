@@ -167,7 +167,11 @@ def predictimage(image, pipeline1, pipeline2):
 	for box in detected_windows_nms:
 		cv2.rectangle(image, tuple((int(box[0]/scale), int(box[1]/scale))), tuple((int(box[2]/scale), int(box[3]/scale))),(0, 255, 0), 5)
 		cv2.putText(image, label[box[4]] + ' ' + str(round(box[5],2)), (int(box[0]/scale), int(box[3]/scale)), font, fontScale,fontColor,lineType)
-	# for box in detected_windows_nms:
+	
+    # for box in detected_windows_nms:
 	# 	cv2.rectangle(new_image, tuple((box[0], box[1])), tuple((box[2],box[3])),(0, 255, 0), 2)
 	# 	cv2.putText(new_image, label(box[4]) + ' ' + str(round(box[5],2)), (box[0], box[3]), font, fontScale,fontColor,lineType)
-	return image
+
+    # box: x1 y1 x2 y2 label confidence
+    
+	return image, detected_windows_nms

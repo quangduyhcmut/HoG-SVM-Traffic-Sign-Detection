@@ -21,7 +21,7 @@ def _hog_normalize_block(block, method, eps=1e-5):
 
     return out
 
-def hogDescriptorScratch(im, cell_size=(8,8), orientations = 9, block_norm = None, cells_per_block=(4,4), visualize = True, visualize_grad=True):
+def hogDescriptorScratch(im, cell_size=(8,8), orientations = 9, block_norm = None, cells_per_block=(4,4), visualize = True, visualize_grad=False):
 	# square root normalization and extract image shape
 	image = np.sqrt(im).astype(np.float32)
 	sx, sy = image.shape # image size
@@ -98,7 +98,7 @@ def hogDescriptorScratch(im, cell_size=(8,8), orientations = 9, block_norm = Non
 
 if __name__ == '__main__':
   
-	im = cv2.imread(r'images\test-3-classes\3\42.png')
+	im = cv2.imread(r'images\test-3-classes\2\321.png')
 	im = cv2.resize(im, (96,96))
 	im_ = im.copy()
 	im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
@@ -134,6 +134,7 @@ if __name__ == '__main__':
 	a[2].imshow(hogImageScratch, cmap='gray')
 	a[2].set_title('HOG feature from scratch')
 	plt.tight_layout()
+	plt.savefig('figures/fig.png')
 	plt.show()
 	hogImageScratch = np.stack([hogImageScratch,hogImageScratch,hogImageScratch],axis=-1)
 	print(hogImageScratch.shape)
