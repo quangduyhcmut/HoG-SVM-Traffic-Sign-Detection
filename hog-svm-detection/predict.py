@@ -60,4 +60,5 @@ mini zalo data
 4: cam khac
 5: nguy hiem
 6: hieu lenh
+7: no sign
 """

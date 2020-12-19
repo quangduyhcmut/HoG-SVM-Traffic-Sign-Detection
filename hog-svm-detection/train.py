@@ -29,7 +29,7 @@ def extract_feature(path):
 			gray = cv2.resize(image, (96, 96))
 			gray = cv2.cvtColor(gray, cv2.COLOR_BGR2GRAY)
 			# extract Histogram of Oriented Gradients from the logo
-			hogFeature = hog(gray,orientations=9,pixels_per_cell=(8, 8),cells_per_block=(4, 4),transform_sqrt=True,visualize=False,block_norm='L2')
+			hogFeature = hog(gray,orientations=9,pixels_per_cell=(8, 8),cells_per_block=(2, 2),transform_sqrt=True,visualize=False,block_norm='L2')
 			data.append(hogFeature)
 			labels.append(make)
 			filenames.append(imagePath)

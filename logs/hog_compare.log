@@ -1,0 +1,33 @@
+INFO:root:Comparing hog descriptor from scratch and scikit image library
+INFO:root:Training SVM classifier with scratch descriptor
+INFO:root:Finish extracting HoG features with scratch descriptor. Total time: 2913.212630748749
+INFO:root:Training...
+INFO:root:Training accuracy: 0.9903567677667802
+INFO:root:Finish training SVM model. Total time: 104.48175644874573
+INFO:root:Saving model...
+INFO:root:Validation accuracy: 0.981346309813463
+INFO:root:Confusion matrix...
+INFO:root:[[  98    0    0    0    0    0    3    1]
+ [   0  428    4    0    7    0    6    3]
+ [   0    1  117    2    1    0    0    1]
+ [   0    0    2  104    6    0    0    0]
+ [   3    3    7    1  229    0    3    3]
+ [   0    0    0    0    1  292    1    2]
+ [   0    0    0    0    0    0  104    2]
+ [  10   42    2    4   12   36   15 8308]]
+INFO:root:Training SVM classifier with skimage descriptor
+INFO:root:Finish extracting HoG features with skimage descriptor. Total time: 462.60362815856934
+INFO:root:Training...
+INFO:root:Training accuracy: 0.9921708411571879
+INFO:root:Finish training SVM model. Total time: 111.70902419090271
+INFO:root:Saving model...
+INFO:root:Validation accuracy: 0.985198702351987
+INFO:root:Confusion matrix...
+INFO:root:[[  98    1    0    0    0    0    3    0]
+ [   0  438    6    0    7    0    6    1]
+ [   0    0  118    0    1    0    0    0]
+ [   0    0    1  105    4    0    0    0]
+ [   1    3    6    1  234    0    2    2]
+ [   0    1    0    0    0  305    1    2]
+ [   0    0    0    0    0    0  107    2]
+ [  12   31    1    5   10   23   13 8313]]

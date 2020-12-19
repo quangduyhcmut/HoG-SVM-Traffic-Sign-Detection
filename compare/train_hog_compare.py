@@ -34,7 +34,7 @@ def extract_feature(path, method = 'skimage'):
                 hogFeature = hog(gray,orientations=9,pixels_per_cell=(8, 8),cells_per_block=(2, 2),transform_sqrt=True,visualize=False,block_norm='L2')
             else:
                 try:
-                    hogFeature = hogDescriptorScratch(gray, cell_size=(8,8), orientations = 9, block_norm = None, cells_per_block=(4,4), visualize = False, visualize_grad=False)
+                    hogFeature = hogDescriptorScratch(gray, cell_size=(8,8), orientations = 9, block_norm = 'L2', cells_per_block=(2,2), visualize = False, visualize_grad=False)
                 except:
                     print("ERROR HERE")
             data.append(hogFeature)
@@ -86,6 +86,7 @@ def train(descriptor=None):
 if __name__=='__main__':
     logging.basicConfig(filename='logs/hog_compare.log', level=logging.INFO)
     logging.info('Comparing hog descriptor from scratch and scikit image library')
+    
     train(descriptor='scratch')
     train(descriptor='skimage')
     

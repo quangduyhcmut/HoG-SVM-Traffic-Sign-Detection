@@ -80,6 +80,7 @@ svm.save_weights(path = modelPath)
 plt.plot(loss_hist)
 plt.xlabel('Iteration number')
 plt.ylabel('Loss value')
+plt.grid('on')
 plt.savefig("figures/training_log.png")
 # plt.show()
 
@@ -93,4 +94,4 @@ load_svm.load_weights(row = data_val.shape[1], col = len(os.listdir(valPath)), p
 predLabel = load_svm.predict(data_val)
 
 print('[INFO] Confusion matrix... \n', metrics.confusion_matrix(predLabel, labels_val))
-print('[INFO] Validation accuracy: ',metrics.accuracy_score(labels_val,predLabel))
+print('[INFO] Validation accuracy: {}'.format(metrics.accuracy_score(labels_val,predLabel)))

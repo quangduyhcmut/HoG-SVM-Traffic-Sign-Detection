@@ -67,32 +67,6 @@ print ('[INFO] That took %fs' % (toc - tic))
 print("[INFO] Saving model...")
 pickle.dump(svm, open(modelPath, 'wb')) 
 
-old_stdout = sys.stdout
-sys.stdout = mystdout = StringIO()
-
-sys.stdout = old_stdout
-loss_history = mystdout.getvalue()
-loss_list = []
-for line in loss_history.split('\n'):
-    if(len(line.split("loss: ")) == 1):
-        continue
-    loss_list.append(float(line.split("loss: ")[-1]))
-    print('###################################',loss_list)
-plt.figure()
-plt.plot(np.arange(len(loss_list)), loss_list)
-plt.xlabel("Time in epochs")
-plt.ylabel("Loss")
-plt.savefig("figures/pure_SGD.png")
-# plt.close()
-
-# A useful debugging strategy is to plot the loss as a function of
-# iteration number:
-# plt.plot(loss_hist)
-# plt.xlabel('Iteration number')
-# plt.ylabel('Loss value')
-# plt.savefig("figures/training_log.png")
-# plt.show()
-
 # Write the LinearSVM.predict function and evaluate the performance on both the
 # training and validation set
 y_train_pred = svm.predict(data_train)

@@ -104,7 +104,7 @@ class LinearClassifier(object):
     return y_pred
   
   def load_weights(self, row, col, path = 'model\svm-scratch.sav'):
-    self.W = np.loadtxt(path).reshape(row, col)
+    self.W = np.loadtxt(path, encoding="utf-8").reshape(row, col)
   
   def save_weights(self, path = 'model\svm-scratch.sav'):
     weights = self.W
