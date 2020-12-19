@@ -73,9 +73,13 @@ def svm_loss_vectorized(W, X, y, reg):
   # result in loss.                                                           #
   #############################################################################
   # pass
+  # print('[DEBUG] X.shape = {}'.format(X.shape))
   num_train = X.shape[0]
   S = X.dot(W)
-
+  # print('[DEBUG] S type: {}'.format(S.dtype))
+  # print('[DEBUG] y type: {}'.format(y.dtype))
+  # print('[DEBUG] num train',num_train)
+  # print(np.choose(y, S.T))
   correct_class_score = np.choose(y, S.T).T.reshape(num_train,1) 
 
   margins = np.maximum(0, S - correct_class_score + 1) 

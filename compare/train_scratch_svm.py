@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append("scratch-vs-library/utils-scratch")
+sys.path.append("compare/utils-scratch/")
 
 import random
 import numpy as np
@@ -37,15 +37,18 @@ def extract_feature(path):
 			# extract Histogram of Oriented Gradients from the logo
 			hogFeature = hog(gray,orientations=9,pixels_per_cell=(8, 8),cells_per_block=(4, 4),transform_sqrt=True,visualize=False,block_norm='L2')
 			data.append(hogFeature)
-			labels.append(make)
+			labels.append(int(make))
 			filenames.append(imagePath)
 		except:
 			print(imagePath)
-
+		# break
 	data = np.stack(data, axis=0)
+	print(data.shape)
 	data = np.hstack([data, np.ones((data.shape[0], 1))])
+	print(data.shape)
 	# only has to worry about optimizing a single weight matrix W => bias trick
 	labels = np.stack(labels, axis=0)
+	print(labels.shape)
 	print("[INFO] Feature shape: {}".format(data.shape))
 	return data, labels, filenames
 
@@ -66,7 +69,7 @@ print("[INFO] Finish extracting HoG features. Total time: {}".format(time.time()
 
 svm = LinearSVM()
 tic = time.time()
-loss_hist = svm.train(data_train, labels_train, learning_rate=1e-2, reg=1e-2, num_iters=15000, verbose=False)
+loss_hist = svm.train(data_train, labels_train, learning_rate=1e-2, reg=0.001, num_iters=15000, verbose=False)
 toc = time.time()
 print ('[INFO] That took %fs' % (toc - tic))
 
@@ -89,5 +92,5 @@ load_svm = LinearSVM()
 load_svm.load_weights(row = data_val.shape[1], col = len(os.listdir(valPath)), path = r'models/compare_scratch_model.sav')
 predLabel = load_svm.predict(data_val)
 
-print('[INFO] Confusion matrix...', metrics.confusion_matrix(predLabel, labels_train))
+print('[INFO] Confusion matrix... \n', metrics.confusion_matrix(predLabel, labels_val))
 print('[INFO] Validation accuracy: ',metrics.accuracy_score(labels_val,predLabel))
