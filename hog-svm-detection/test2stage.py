@@ -22,10 +22,12 @@ modelstage2 = './models/Stage2-SGD-8-class.sav'
 svm1 = pickle.load(open(modelstage1, 'rb'))
 svm2 = pickle.load(open(modelstage2, 'rb'))
 listOfFiles = [f for f in os.listdir('./img_test/') if os.path.isfile('./img_test/'+f)]
+# """
 #For single image:
 st = time.time()
-filename = '1492.png'
+filename = '1545.png'
 image = cv2.imread('./img_test/'+filename)
+# image = cv2.imread('../zalo/traffic_train/images/'+filename)
 # new_image, scale, newsize = resize(image, 1000)
 # gray = cv2.cvtColor(new_image, cv2.COLOR_BGR2GRAY)
 # hsv = cv2.cvtColor(new_image, cv2.COLOR_BGR2HSV)
@@ -33,19 +35,18 @@ image = cv2.imread('./img_test/'+filename)
 # window_list = np.array((get_multiscale_windows(new_image, mask, newsize)))
 predicted_image = predictimage(image, svm1, svm2)
 print(time.time()-st, filename)
-cv2.imwrite('./img_test/result/'+filename.split('.')[0]+'_result1.png',predicted_image)
+cv2.imwrite('./img_test/result/'+filename.split('.')[0]+'_result.png',predicted_image)
+# cv2.imwrite('./img_test/result/'+filename.split('.')[0]+'_mask.png',mask*255)
+
 """
+
 for filename in listOfFiles:
 	# filename = '1502.png'
-	image = cv2.imread('./img_test/'+filename)
-	new_image, scale, newsize = resize(image, 1000)
-	gray = cv2.cvtColor(new_image, cv2.COLOR_BGR2GRAY)
-	hsv = cv2.cvtColor(new_image, cv2.COLOR_BGR2HSV)
-	# mask = cv2.inRange(hsv, np.array([0, 65, 70]), np.array([221, 210, 255]))
-	mask = cv2.inRange(hsv, np.array([0, 0, 0]), np.array([255, 255, 255]))
-	window_list = np.array((get_multiscale_windows(new_image, mask, newsize)))
 	st = time.time()
-	predicted_image = predictimage(new_image, mask, svm1, svm2)
-	cv2.imwrite('./img_test/result/'+filename.split('.')[0]+'_result1.png',predicted_image)
+	image = cv2.imread('./img_test/'+filename)
+	predicted_image, mask = predictimage(image, svm1, svm2)
+	cv2.imwrite('./img_test/result/'+filename.split('.')[0]+'_result2.png',predicted_image)
+	cv2.imwrite('./img_test/result/'+filename.split('.')[0]+'_mask2.png',mask*255)
+	print(time.time()-st, filename)
 	# cv2.imwrite('../img_test/result/'+filename.split('.')[0]+'_mask.png',mask)
 """
